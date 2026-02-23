@@ -55,8 +55,10 @@ void main_task(__unused void *params) {
     cyw43_arch_enable_sta_mode();
     printf("Connecting to Wi-Fi...\n");
     if (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000)) {
-        printf("failed to connect.\n");
-        exit(1);
+        while(1) {
+            printf("failed to connect.\n");
+            sleep_ms(2000);
+        }
     } else {
         printf("Connected.\n");
     }
@@ -72,11 +74,17 @@ void main_task(__unused void *params) {
     int pass = http_client_request_sync(cyw43_arch_async_context(), &req);
     altcp_tls_free_config(req.tls_config);
     if (pass != 0) {
-        panic("test failed");
+        while(1) {
+            printf("test failed\n");
+            sleep_ms(2000);
+        }
     }
 
     cyw43_arch_deinit();
-    panic("Test passed");
+    while(1) {
+        printf("Test passed\n");
+        sleep_ms(2000);
+    }
 }
 
 void vLaunch( void) {

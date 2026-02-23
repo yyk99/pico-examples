@@ -15,8 +15,9 @@ target_link_libraries(picow_freertos_iperf_server_nosys
         pico_stdlib
         pico_lwip_iperf
         FreeRTOS-Kernel-Heap4 # FreeRTOS kernel and dynamic heap
-        )
+    )
 pico_add_extra_outputs(picow_freertos_iperf_server_nosys)
+pico_enable_stdio_usb(picow_freertos_iperf_server_nosys 1)
 
 add_executable(picow_freertos_iperf_server_sys
         picow_freertos_iperf.c
@@ -38,3 +39,4 @@ target_link_libraries(picow_freertos_iperf_server_sys
         FreeRTOS-Kernel-Heap4 # FreeRTOS kernel and dynamic heap
         )
 pico_add_extra_outputs(picow_freertos_iperf_server_sys)
+pico_enable_stdio_usb(picow_freertos_iperf_server_sys 1)
