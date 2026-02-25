@@ -28,6 +28,8 @@ target_link_libraries(picow_http_client
         pico_stdlib
         )
 pico_add_extra_outputs(picow_http_client)
+pico_enable_stdio_uart(blink 0)
+pico_enable_stdio_usb(blink 1)
 
 add_executable(picow_http_client_verify
         picow_http_verify.c
