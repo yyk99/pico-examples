@@ -12,3 +12,4 @@ nohup.out
 set-b-main.gdb
 .clangd
 compile_commands.json
+generated/
