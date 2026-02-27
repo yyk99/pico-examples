@@ -87,6 +87,11 @@ void main_task(__unused void *params) {
     }
 }
 
+void vApplicationStackOverflowHook(TaskHandle_t task, char *name) {
+    printf("STACK OVERFLOW in task: %s\n", name);
+    panic("stack overflow");
+}
+
 void vLaunch( void) {
     TaskHandle_t task;
     xTaskCreate(main_task, "TestMainThread", TEST_TASK_STACK_SIZE, NULL, TEST_TASK_PRIORITY, &task);

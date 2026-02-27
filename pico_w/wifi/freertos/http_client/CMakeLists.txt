@@ -33,6 +33,7 @@ target_compile_definitions(picow_freertos_http_client_sys PRIVATE
         NO_SYS=0 # don't want NO_SYS (generally this would be in your lwipopts.h)
         ALTCP_MBEDTLS_AUTHMODE=MBEDTLS_SSL_VERIFY_REQUIRED
         CYW43_TASK_STACK_SIZE=2048
+        FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
         )
 target_include_directories(picow_freertos_http_client_sys PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
