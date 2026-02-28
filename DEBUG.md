@@ -31,7 +31,3 @@ in Terminal 2
 	(gdb) load
 	(gdb) b main
 	(gdb) continue
-
-alternatively nohup can be used to run openocd as bg process
-
-	sudo nohup openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"

@@ -2,9 +2,10 @@ add_executable(picow_freertos_iperf_server_nosys
         picow_freertos_iperf.c
         )
 target_compile_definitions(picow_freertos_iperf_server_nosys PRIVATE
-        WIFI_SSID=\"${WIFI_SSID}\"
-        WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
-        )
+    WIFI_SSID=\"${WIFI_SSID}\"
+    WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
+    FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
+    )
 target_include_directories(picow_freertos_iperf_server_nosys PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/.. # for our common FreeRTOSConfig
@@ -26,6 +27,7 @@ target_compile_definitions(picow_freertos_iperf_server_sys PRIVATE
         WIFI_SSID=\"${WIFI_SSID}\"
         WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
         NO_SYS=0            # don't want NO_SYS (generally this would be in your lwipopts.h)
+        FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
         )
 target_include_directories(picow_freertos_iperf_server_sys PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}

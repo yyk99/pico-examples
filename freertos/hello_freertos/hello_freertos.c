@@ -176,6 +176,48 @@ void vLaunch( void) {
     vTaskStartScheduler();
 }
 
+#if configSUPPORT_STATIC_ALLOCATION
+#if (tskKERNEL_VERSION_MAJOR < 11)
+/* Version 10 does not provide kernel implementation of allocation functions */
+
+#if 0
+/* defined in portable/ThirdParty/GCC/RP2040/idle_task_static_memory.c */
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer,
+                                   StackType_t **ppxIdleTaskStackBuffer,
+                                   configSTACK_DEPTH_TYPE *puxIdleTaskStackSize) {
+    static StaticTask_t xIdleTaskTCB;
+    static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
+    *ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
+    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
+    *puxIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+#endif
+
+#if configNUMBER_OF_CORES > 1
+void vApplicationGetPassiveIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer,
+                                          StackType_t **ppxIdleTaskStackBuffer,
+                                          configSTACK_DEPTH_TYPE *puxIdleTaskStackSize,
+                                          BaseType_t xPassiveIdleTaskIndex) {
+    static StaticTask_t xPassiveIdleTaskTCB[configNUMBER_OF_CORES - 1];
+    static StackType_t uxPassiveIdleTaskStack[configNUMBER_OF_CORES - 1][configMINIMAL_STACK_SIZE];
+    *ppxIdleTaskTCBBuffer = &xPassiveIdleTaskTCB[xPassiveIdleTaskIndex];
+    *ppxIdleTaskStackBuffer = uxPassiveIdleTaskStack[xPassiveIdleTaskIndex];
+    *puxIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+#endif
+
+void vApplicationGetTimerTaskMemory(StaticTask_t **ppxTimerTaskTCBBuffer,
+                                    StackType_t **ppxTimerTaskStackBuffer,
+                                    configSTACK_DEPTH_TYPE *puxTimerTaskStackSize) {
+    static StaticTask_t xTimerTaskTCB;
+    static StackType_t uxTimerTaskStack[configTIMER_TASK_STACK_DEPTH];
+    *ppxTimerTaskTCBBuffer = &xTimerTaskTCB;
+    *ppxTimerTaskStackBuffer = uxTimerTaskStack;
+    *puxTimerTaskStackSize = configTIMER_TASK_STACK_DEPTH;
+}
+#endif /* tskKERNEL_VERSION_MAJOR < 11 */
+#endif
+
 int main( void )
 {
     stdio_init_all();
