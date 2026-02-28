@@ -29,6 +29,10 @@ endif()
 # Initialize the SDK
 pico_sdk_init()
 
+# Place all built executables under bin/ in the build tree.
+# For Ninja Multi-Config this gives bin/Debug/ and bin/Release/.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 include(example_auto_set_url.cmake)
 
 function(add_subdirectory_exclude_platforms NAME)
