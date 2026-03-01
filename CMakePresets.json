@@ -1,0 +1,90 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "PICO_SDK_PATH": "/opt/pico-sdk",
+        "WIFI_SSID": "$env{WIFI_SSID}",
+        "WIFI_PASSWORD": "$env{WIFI_PASSWORD}"
+      }
+    },
+    {
+      "name": "pico2_w",
+      "displayName": "Pico 2 W (RP2350, SMP FreeRTOS kernel)",
+      "description": "Build for pico2_w board with raspberrypi FreeRTOS kernel (V11, SMP)",
+      "inherits": "base",
+      "cacheVariables": {
+        "PICO_BOARD": "pico2_w",
+        "FREERTOS_KERNEL_PATH": "/home/yyk/src/raspberrypi-FreeRTOS-Kernel/"
+      }
+    },
+    {
+      "name": "pico_w",
+      "displayName": "Pico W (RP2040, mainline FreeRTOS kernel)",
+      "description": "Build for pico_w board with mainline FreeRTOS kernel (V10)",
+      "inherits": "base",
+      "cacheVariables": {
+        "PICO_BOARD": "pico_w",
+        "FREERTOS_KERNEL_PATH": "/home/yyk/src/FreeRTOS-Kernel/"
+      }
+    },
+    {
+      "name": "pico",
+      "displayName": "Pico (RP2040, mainline FreeRTOS kernel)",
+      "description": "Build for pico board with mainline FreeRTOS kernel (V10)",
+      "inherits": "base",
+      "cacheVariables": {
+        "PICO_BOARD": "pico",
+        "FREERTOS_KERNEL_PATH": "/home/yyk/src/FreeRTOS-Kernel/"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "pico2_w-debug",
+      "displayName": "Pico 2 W Debug",
+      "configurePreset": "pico2_w",
+      "configuration": "Debug"
+    },
+    {
+      "name": "pico2_w-release",
+      "displayName": "Pico 2 W Release",
+      "configurePreset": "pico2_w",
+      "configuration": "Release"
+    },
+    {
+      "name": "pico_w-debug",
+      "displayName": "Pico W Debug",
+      "configurePreset": "pico_w",
+      "configuration": "Debug"
+    },
+    {
+      "name": "pico_w-release",
+      "displayName": "Pico W Release",
+      "configurePreset": "pico_w",
+      "configuration": "Release"
+    },
+    {
+      "name": "pico-debug",
+      "displayName": "Pico Debug",
+      "configurePreset": "pico",
+      "configuration": "Debug"
+    },
+    {
+      "name": "pico-release",
+      "displayName": "Pico Release",
+      "configurePreset": "pico",
+      "configuration": "Release"
+    }
+  ]
+}

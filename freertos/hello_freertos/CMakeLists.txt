@@ -15,6 +15,7 @@ target_link_libraries(hello_freertos_one_core PRIVATE
 # This defaults to 2 in FreeRTOSConfig_examples_common.h if not defined in here
 target_compile_definitions(hello_freertos_one_core PRIVATE
     configNUMBER_OF_CORES=1
+    FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
     )
 if(PICO_CYW43_SUPPORTED)
     # For led support on pico_w
@@ -27,6 +28,9 @@ pico_add_extra_outputs(hello_freertos_one_core)
 # Example running FreeRTOS on 2 cores
 add_executable(hello_freertos_two_cores
     hello_freertos.c
+)
+target_compile_definitions(hello_freertos_two_cores PRIVATE
+    FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
     )
 target_include_directories(hello_freertos_two_cores PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/..
@@ -64,6 +68,7 @@ target_link_libraries(hello_freertos_static_allocation PRIVATE
 target_compile_definitions(hello_freertos_static_allocation PRIVATE
     configSUPPORT_STATIC_ALLOCATION=1
     configSUPPORT_DYNAMIC_ALLOCATION=0
+    FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
     )
 if(PICO_CYW43_SUPPORTED)
     # For led support on pico_w

@@ -5,6 +5,23 @@
 See [Getting started with Raspberry Pi Pico-series](https://rptl.io/pico-get-started) and the README in the [pico-sdk](https://github.com/raspberrypi/pico-sdk) for information
 on getting up and running.
 
+### clangd support (code navigation)
+
+`CMakeLists.txt` sets `CMAKE_EXPORT_COMPILE_COMMANDS ON`, so a `compile_commands.json` is generated in the build directory after configuring. Point clangd at it using one of these methods:
+
+Symlink to the project root (simplest):
+```bash
+ln -sf build/<preset>/compile_commands.json compile_commands.json
+```
+
+Or create a `.clangd` file in the project root:
+```yaml
+CompileFlags:
+  CompilationDatabase: build/<preset>
+```
+
+Replace `<preset>` with your actual build directory (e.g. `build/pico_w`). Only one build directory can be active at a time, so pick the board you are currently working with.
+
 ##### Notes on different boards and platforms (RP2040 / RP2350) 
 
 The majority of examples are applicable to both RP2040 and RP2350 based boards,

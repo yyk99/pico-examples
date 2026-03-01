@@ -33,6 +33,7 @@ target_compile_definitions(picow_freertos_http_client_sys PRIVATE
         NO_SYS=0 # don't want NO_SYS (generally this would be in your lwipopts.h)
         ALTCP_MBEDTLS_AUTHMODE=MBEDTLS_SSL_VERIFY_REQUIRED
         CYW43_TASK_STACK_SIZE=2048
+        FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
         )
 target_include_directories(picow_freertos_http_client_sys PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
@@ -46,6 +47,7 @@ target_link_libraries(picow_freertos_http_client_sys
         FreeRTOS-Kernel-Heap4 # FreeRTOS kernel and dynamic heap
         )
 pico_add_extra_outputs(picow_freertos_http_client_sys)
+pico_enable_stdio_usb(picow_freertos_http_client_sys 1)
 
 # Ignore warnings from lwip code
 set_source_files_properties(
