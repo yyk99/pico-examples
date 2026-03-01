@@ -26,6 +26,8 @@ int main() {
         return 1;
     }
 
+    printf("WIFI connected\n");
+
     EXAMPLE_HTTP_REQUEST_T req1 = {0};
     req1.hostname = HOST;
     req1.url = URL_REQUEST;

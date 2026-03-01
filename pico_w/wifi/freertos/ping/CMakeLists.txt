@@ -6,6 +6,7 @@ if (EXISTS ${PICO_LWIP_CONTRIB_PATH}/apps/ping/ping.c)
     target_compile_definitions(picow_freertos_ping_nosys PRIVATE
             WIFI_SSID=\"${WIFI_SSID}\"
             WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
+            FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
             )
     target_include_directories(picow_freertos_ping_nosys PRIVATE
             ${CMAKE_CURRENT_LIST_DIR}
@@ -31,6 +32,7 @@ if (EXISTS ${PICO_LWIP_CONTRIB_PATH}/apps/ping/ping.c)
             NO_SYS=0            # don't want NO_SYS (generally this would be in your lwipopts.h)
             LWIP_SOCKET=1       # we need the socket API (generally this would be in your lwipopts.h)
             PING_USE_SOCKETS=1
+            FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
             )
     target_include_directories(picow_freertos_ping_sys PRIVATE
             ${CMAKE_CURRENT_LIST_DIR}

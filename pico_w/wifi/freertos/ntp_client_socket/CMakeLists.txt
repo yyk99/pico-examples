@@ -6,6 +6,7 @@ target_compile_definitions(picow_freertos_ntp_client_socket PRIVATE
         WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
         NO_SYS=0            # don't want NO_SYS (generally this would be in your lwipopts.h)
         LWIP_SOCKET=1       # we need the socket API (generally this would be in your lwipopts.h)
+        FREERTOS_SMP_SUPPORT=${FREERTOS_SMP_SUPPORT}
         )
 target_include_directories(picow_freertos_ntp_client_socket PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
